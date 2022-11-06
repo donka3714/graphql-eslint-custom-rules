@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="3" failures="1" errors="0" time="3.552">
+  <testsuite name="no-foo-variables" errors="0" failures="1" skipped="0" timestamp="2022-11-06T00:53:54" time="3.38" tests="3">
+    <testcase classname="no-foo-variables valid bar" name="no-foo-variables valid bar" time="0.962">
+    </testcase>
+    <testcase classname="no-foo-variables valid foo" name="no-foo-variables valid foo" time="0.011">
+      <failure>assert.strictEqual(received, expected)
+
+Expected value to strictly be equal to:
+  0
+Received:
+  1
+
+Message:
+  Should have no errors but had 1: [
+  {
+    ruleId: &apos;no-foo-variables&apos;,
+    severity: 1,
+    message: &apos;Do not pity the foo&apos;,
+    line: 1,
+    column: 1,
+    nodeType: &apos;Identifier&apos;,
+    messageId: &apos;nofoo&apos;,
+    endLine: 1,
+    endColumn: 4
+  }
+]
+    at testValidTemplate (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\eslint\lib\rule-tester\rule-tester.js:749:20)
+    at Object.&lt;anonymous&gt; (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\eslint\lib\rule-tester\rule-tester.js:1028:29)
+    at Promise.then.completed (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\utils.js:289:28)
+    at new Promise (&lt;anonymous&gt;)
+    at callAsyncCircusFn (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\utils.js:222:10)
+    at _callCircusTest (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:248:40)
+    at processTicksAndRejections (node:internal/process/task_queues:96:5)
+    at _runTest (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:184:3)
+    at _runTestsForDescribeBlock (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:86:9)
+    at _runTestsForDescribeBlock (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:81:9)
+    at _runTestsForDescribeBlock (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:81:9)
+    at run (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:26:3)
+    at runAndTransformResultsToJestFormat (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:120:21)
+    at jestAdapter (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
+    at runTestInternal (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-runner\build\runTest.js:367:16)
+    at runTest (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-runner\build\runTest.js:444:34)</failure>
+    </testcase>
+    <testcase classname="no-foo-variables invalid foo" name="no-foo-variables invalid foo" time="0.008">
+    </testcase>
+  </testsuite>
+</testsuites>
