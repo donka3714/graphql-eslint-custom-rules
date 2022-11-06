@@ -6,7 +6,7 @@ const ruleTester = new ESLintUtils.RuleTester({
 });
 
 ruleTester.run("no-foo-variables", rule, {
-  valid: ["bar", "baz"],
+  valid: ["bar", "test"],
   invalid: [
     {
       code: "foo",

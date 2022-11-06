@@ -13,7 +13,7 @@ module.exports = {
   plugins: ["sonarjs", "prettier"],
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: "module"
+    sourceType: "module"    
   },
   rules: {
     "prettier/prettier": ["off", { trailingComma: "none" }],
@@ -37,18 +37,28 @@ module.exports = {
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
-        "plugin:prettier/recommended"
+        "plugin:prettier/recommended",        
       ],
       plugins: ["sonarjs", "@typescript-eslint", "prettier"],
-      parser: "@typescript-eslint/parser",
+      parser: ["@typescript-eslint/parser"],         
       rules: {
         curly: [2, "all"]
       }
+    },
+    {
+      files: ["*.graphql"],
+      parser: ["@graphql-eslint/eslint-plugin"],
+      plugins: ["@graphql-eslint", "eslint-plugin-eslint-comments"],
+      rules: {
+        "prettier/prettier": [
+          "error"
+        ],
+        "require-field-issuccessful-in-mutation-result": "error"
+      },
+      parserOptions: {
+        schema: "./src/graphql/schema/*.graphql" 
+      },
+      extends: "plugin:@graphql-eslint/schema-recommended",      
     }
-  ],
-  settings: {
-    react: {
-      version: "detect"
-    }
-  }
+  ]
 };
