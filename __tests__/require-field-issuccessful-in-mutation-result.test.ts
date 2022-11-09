@@ -1,18 +1,45 @@
-import { GraphQLRuleTester } from '@graphql-eslint/eslint-plugin'
+import { GraphQLRuleTester, ParserOptions } from '@graphql-eslint/eslint-plugin';
 import rule from '../src/rules/require-field-issuccessful-in-mutation-result';
 
-const ruleTester = new GraphQLRuleTester()
+const useSchema = (code: string): { code: string; parserOptions: ParserOptions } => ({
+  code,
+  parserOptions: {
+    schema: /* GraphQL */ `
+      type CreateUserPayload {
+        isSuccessful: String
+      }
 
-ruleTester.runGraphQLTests('require-field-issuccessful-in-mutation-result', rule, {
-  valid: [
-    {
-      code: 'query something { foo }'
-    }
+      ${code}
+    `,
+    filePath: "",
+  },
+});
+
+const ruleTester = new GraphQLRuleTester();
+
+ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rule, {
+  valid: [    
+    useSchema(/* GraphQL */ `      
+      type CreateUserPayload {             
+        isSuccessful: String
+      }
+      type Mutation {
+        createUser: CreateUserPayload!
+      }
+    `),    
   ],
   invalid: [
     {
-      code: 'query invalid { foo }',
-      errors: [{ message: 'Your error message.' }]
-    }
-  ]
-})
+      name: 'should ignore arguments',
+      ...useSchema(/* GraphQL */ `
+      type CreateUserPayload {
+        user: String!             
+      }        
+      type Mutation {
+          createUser: CreateUserPayload!
+        }        
+      `),
+      errors: [{ message: 'Mutation result type "CreateUserPayload" must contain a field isSuccessful' }],
+    },    
+  ],
+});

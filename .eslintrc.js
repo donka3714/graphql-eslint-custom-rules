@@ -1,37 +1,9 @@
-module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    jest: true,
-    node: true
-  },
-  extends: [
-    "plugin:sonarjs/recommended",
-    "eslint:recommended",
-    "plugin:prettier/recommended"
-  ],
-  plugins: ["sonarjs", "prettier"],
-  parserOptions: {
-    ecmaVersion: 2018,
-    sourceType: "module"    
-  },
-  rules: {
-    "prettier/prettier": ["off", { trailingComma: "none" }],
-    curly: 2
-  },
-  globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly"
-  },
-  overrides: [
-    {
-      files: ["**/*.test.*", "**/*.stories.*"],
-      rules: {
-        "sonarjs/no-duplicate-string": 0
-      }
-    },
+module.exports = {  
+  overrides: [    
     {
       files: ["*.ts"],
+      parser: ["@typescript-eslint/parser"],
+      processor: "@graphql-eslint/graphql",
       extends: [
         "plugin:sonarjs/recommended",
         "eslint:recommended",
@@ -39,21 +11,18 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",        
       ],
-      plugins: ["sonarjs", "@typescript-eslint", "prettier"],
-      parser: ["@typescript-eslint/parser"],         
-      rules: {
-        curly: [2, "all"]
-      }
+      plugins: ["sonarjs", "@typescript-eslint", "prettier"]      
     },
     {
       files: ["*.graphql"],
+      processor: "@graphql-eslint/graphql",
       parser: ["@graphql-eslint/eslint-plugin"],
       plugins: ["@graphql-eslint", "eslint-plugin-eslint-comments"],
       rules: {
         "prettier/prettier": [
           "error"
         ],
-        "require-field-issuccessful-in-mutation-result": "error"
+        "require-field-issuccessful-in-mutation-result":"off"
       },
       parserOptions: {
         schema: "./src/graphql/schema/*.graphql" 

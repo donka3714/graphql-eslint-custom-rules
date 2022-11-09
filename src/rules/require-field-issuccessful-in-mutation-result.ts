@@ -1,58 +1,103 @@
-
+import { isObjectType, NameNode } from 'graphql';
+import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin';
 import type { GraphQLESLintRule } from '@graphql-eslint/eslint-plugin/types';
-import { requireGraphQLSchemaFromContext } from '@graphql-eslint/eslint-plugin'
+import type { GraphQLESTreeNode } from '@graphql-eslint/eslint-plugin/estree-converter';
 
 const RULE_ID = 'require-field-issuccessful-in-mutation-result';
 
 const rule: GraphQLESLintRule = {
-    create(context) {
-        console.log("New rule called....");
-      return {
-        OperationDefinition(node) {
-            console.log("Called....");
-            console.log(context);
-            const schema = requireGraphQLSchemaFromContext(RULE_ID, context)
-            console.log(schema);
-          if (!node.name || !node.name.value) {
-            console.log("If block entered....");
+  meta: {
+    type: 'suggestion',
+    docs: {
+      category: 'Schema',      
+      requiresSchema: true,
+      examples: [
+        {
+          title: 'Incorrect',
+          code: /* GraphQL */ `
+            type User { ... }
+
+            type Mutation {
+              createUser: User!
+            }
+          `,
+        },
+        {
+          title: 'Correct',
+          code: /* GraphQL */ `
+            type User { ... }
+
+            type Query { ... }
+
+            type CreateUserPayload {
+              user: User!
+              query: Query!
+            }
+
+            type Mutation {
+              createUser: CreateUserPayload!
+            }
+          `,
+        },
+      ],
+    },
+    schema: [],
+  },
+  create(context) {
+    const schema = requireGraphQLSchemaFromContext(RULE_ID, context);
+    const mutationType = schema.getMutationType();
+    
+    console.log("******Entered1***********");
+    console.log(mutationType);
+    
+    
+    if (!mutationType) {
+      return {};
+    }
+
+    console.log("******Entered2***********");
+
+    const selector = `:matches(ObjectTypeDefinition, ObjectTypeExtension)[name.value=${mutationType.name}] > FieldDefinition > .gqlType Name`;
+
+    console.log("******Entered3***********");
+
+    return {
+      [selector](node: GraphQLESTreeNode<NameNode>) {
+
+        console.log("******Entered4***********");
+        
+        const typeName = node.value;
+        const graphQLType = schema.getType(typeName);
+
+        console.log("Type------");        
+        console.log(graphQLType);
+        
+
+        if (isObjectType(graphQLType)) {
+          const { fields } = graphQLType.astNode;
+          //console.log(name);          
+          //const fields  = graphQLType.astNode;
+          //console.log(fields);
+          //const nameNode = fields?.name;
+          //console.log(nameNode);
+          //const value = nameNode?.value;
+          //console.log(value);
+          
+          const hasQueryType = fields.some(field => field.name === 'isSuccessful');
+          console.log("Indicator");          
+          console.log(hasQueryType);
+          
+          if (!hasQueryType) {
+            //if (!false) {
             context.report({
               node,
-              message: 'Oops, name is required!'
-            })
+              message: `Mutation result type "${graphQLType.name}" must contain a field isSuccessful`,
+            });
           }
         }
-      }
-    },
-    meta: {
-        type: 'suggestion',
-        hasSuggestions: true,
-        docs: {
-          category: 'Schema',         
-          requiresSchema: true,
-          examples: [
-            {
-              title: 'Incorrect',
-              code: /* GraphQL */ `
-                type Mutation {
-                  createUser: Boolean
-                }
-              `,
-            },
-            {
-              title: 'Correct',
-              code: /* GraphQL */ `
-                type Mutation {
-                  createUser: User!
-                }
-              `,
-            },
-          ],
-        },
-        schema: [],
       },
-  }  
-  
-  export default rule;
+    };
+  },
+};
 
-
-
+export default rule;
