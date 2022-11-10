@@ -48,7 +48,7 @@ const rule: GraphQLESLintRule = {
     const mutationType = schema.getMutationType();
     
     console.log("******Entered1***********");
-    console.log(mutationType);
+    //console.log(mutationType);
     
     
     if (!mutationType) {
@@ -69,8 +69,8 @@ const rule: GraphQLESLintRule = {
         const typeName = node.value;
         const graphQLType = schema.getType(typeName);
 
-        console.log("Type------");        
-        console.log(graphQLType);
+        //console.log("Type------");        
+        //console.log(graphQLType);
         
 
         if (isObjectType(graphQLType)) {
@@ -81,13 +81,16 @@ const rule: GraphQLESLintRule = {
           //const nameNode = fields?.name;
           //console.log(nameNode);
           //const value = nameNode?.value;
-          //console.log(value);
+          //console.log(fields.name);
+
+          fields.some(field => console.log(field.name)
+          );
           
-          const hasQueryType = fields.some(field => field.name === 'isSuccessful');
+          const hasRequiredField = fields.some(field => field.name.value === 'isSuccessful');
           console.log("Indicator");          
-          console.log(hasQueryType);
+          console.log(hasRequiredField);
           
-          if (!hasQueryType) {
+          if (!hasRequiredField) {
             //if (!false) {
             context.report({
               node,
@@ -100,4 +103,4 @@ const rule: GraphQLESLintRule = {
   },
 };
 
-export default rule;
+module.exports=rule;

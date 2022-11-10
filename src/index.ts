@@ -1,8 +1,8 @@
-import noFooRule from "./rules/no-foo-variables"
+import noFooRule from "./rules/require-field-issuccessful-in-mutation-result"
 
 module.exports = {
     rules: {
-        "no-foo-variables": noFooRule
+        "require-field-issuccessful-in-mutation-result": noFooRule
     },
     configs: {
         recommended: {
@@ -13,7 +13,7 @@ module.exports = {
                 }
             },
             rules: {
-                "@custom-rules/graphql-eslint-custom-rules/no-foo-variables": 1
+                "@custom-rules/graphql-eslint-custom-rules/require-field-issuccessful-in-mutation-result": 1
             }
         }
     }

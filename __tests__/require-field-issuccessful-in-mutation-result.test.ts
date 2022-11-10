@@ -18,28 +18,26 @@ const useSchema = (code: string): { code: string; parserOptions: ParserOptions }
 const ruleTester = new GraphQLRuleTester();
 
 ruleTester.runGraphQLTests('require-field-of-type-query-in-mutation-result', rule, {
-  valid: [    
-    useSchema(/* GraphQL */ `      
-      type CreateUserPayload {             
-        isSuccessful: String
-      }
+  valid: [     
+    useSchema(/* GraphQL */ `
+        # type Query is not defined and no error is reported
       type Mutation {
         createUser: CreateUserPayload!
       }
-    `),    
+`   ),  
   ],
   invalid: [
     {
-      name: 'should ignore arguments',
-      ...useSchema(/* GraphQL */ `
-      type CreateUserPayload {
-        user: String!             
-      }        
+      name: 'Test for failure',
+      ...useSchema(/* GraphQL */ `             
+      type DeleteUserPayload {             
+        failed: String
+      }
       type Mutation {
-          createUser: CreateUserPayload!
-        }        
+        deleteUser: DeleteUserPayload!
+      }       
       `),
-      errors: [{ message: 'Mutation result type "CreateUserPayload" must contain a field isSuccessful' }],
+      errors: [{ message: 'Mutation result type "DeleteUserPayload" must contain a field isSuccessful' }],
     },    
   ],
 });

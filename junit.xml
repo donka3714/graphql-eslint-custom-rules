@@ -1,70 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="6" failures="1" errors="0" time="6.872">
-  <testsuite name="no-foo-variables" errors="0" failures="0" skipped="0" timestamp="2022-11-09T12:55:28" time="5.161" tests="3">
-    <testcase classname="no-foo-variables valid bar" name="no-foo-variables valid bar" time="1.109">
-    </testcase>
-    <testcase classname="no-foo-variables valid test" name="no-foo-variables valid test" time="0.005">
-    </testcase>
-    <testcase classname="no-foo-variables invalid foo" name="no-foo-variables invalid foo" time="0.011">
-    </testcase>
-  </testsuite>
-  <testsuite name="require-field-of-type-query-in-mutation-result" errors="0" failures="1" skipped="0" timestamp="2022-11-09T12:55:28" time="5.954" tests="3">
-    <testcase classname="require-field-of-type-query-in-mutation-result valid       
-      type CreateUserPayload {             
-        isSuccessful: String
-      }
+<testsuites name="jest tests" tests="3" failures="0" errors="0" time="17.108">
+  <testsuite name="require-field-of-type-query-in-mutation-result" errors="0" failures="0" skipped="0" timestamp="2022-11-10T14:37:25" time="15.871" tests="3">
+    <testcase classname="require-field-of-type-query-in-mutation-result valid 
+        # type Query is not defined and no error is reported
       type Mutation {
         createUser: CreateUserPayload!
       }
-    " name="require-field-of-type-query-in-mutation-result valid       
-      type CreateUserPayload {             
-        isSuccessful: String
-      }
+" name="require-field-of-type-query-in-mutation-result valid 
+        # type Query is not defined and no error is reported
       type Mutation {
         createUser: CreateUserPayload!
       }
-    " time="0.04">
-      <failure>assert.strictEqual(received, expected)
-
-Expected value to strictly be equal to:
-  0
-Received:
-  1
-
-Message:
-  Should have no errors but had 1: [
-  {
-    ruleId: &apos;require-field-of-type-query-in-mutation-result&apos;,
-    severity: 1,
-    message: &apos;Mutation result type &quot;CreateUserPayload&quot; must contain a field isSuccessful&apos;,
-    line: 6,
-    column: 21,
-    nodeType: &apos;Name&apos;,
-    endLine: 6,
-    endColumn: 38
-  }
-]
-    at testValidTemplate (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\eslint\lib\rule-tester\rule-tester.js:749:20)
-    at Object.&lt;anonymous&gt; (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\eslint\lib\rule-tester\rule-tester.js:1028:29)
-    at Promise.then.completed (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\utils.js:289:28)
-    at new Promise (&lt;anonymous&gt;)
-    at callAsyncCircusFn (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\utils.js:222:10)
-    at _callCircusTest (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:248:40)
-    at processTicksAndRejections (node:internal/process/task_queues:96:5)
-    at _runTest (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:184:3)
-    at _runTestsForDescribeBlock (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:86:9)
-    at _runTestsForDescribeBlock (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:81:9)
-    at _runTestsForDescribeBlock (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:81:9)
-    at run (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\run.js:26:3)
-    at runAndTransformResultsToJestFormat (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapterInit.js:120:21)
-    at jestAdapter (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:79:19)
-    at runTestInternal (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-runner\build\runTest.js:367:16)
-    at runTest (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-runner\build\runTest.js:444:34)
-    at Object.worker (C:\Users\dcnar\Workspace\eslint\graphql-eslint-custom-rules\node_modules\jest-runner\build\testWorker.js:106:12)</failure>
+" time="0.507">
     </testcase>
-    <testcase classname="require-field-of-type-query-in-mutation-result invalid should ignore arguments" name="require-field-of-type-query-in-mutation-result invalid should ignore arguments" time="0.014">
+    <testcase classname="require-field-of-type-query-in-mutation-result invalid Test for failure" name="require-field-of-type-query-in-mutation-result invalid Test for failure" time="0.285">
     </testcase>
-    <testcase classname=" should ignore arguments" name=" should ignore arguments" time="0.002">
+    <testcase classname=" Test for failure" name=" Test for failure" time="0.014">
     </testcase>
   </testsuite>
 </testsuites>

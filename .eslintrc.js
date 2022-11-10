@@ -1,8 +1,9 @@
 module.exports = {  
   overrides: [    
-    {
-      files: ["*.ts"],
+    {      
       parser: ["@typescript-eslint/parser"],
+      files: ["*.graphql"],
+      plugins: ["sonarjs", "@typescript-eslint", "prettier"],
       processor: "@graphql-eslint/graphql",
       extends: [
         "plugin:sonarjs/recommended",
@@ -10,8 +11,7 @@ module.exports = {
         "plugin:@typescript-eslint/eslint-recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:prettier/recommended",        
-      ],
-      plugins: ["sonarjs", "@typescript-eslint", "prettier"]      
+      ]         
     },
     {
       files: ["*.graphql"],
@@ -22,7 +22,7 @@ module.exports = {
         "prettier/prettier": [
           "error"
         ],
-        "require-field-issuccessful-in-mutation-result":"off"
+        "require-field-issuccessful-in-mutation-result":"error"
       },
       parserOptions: {
         schema: "./src/graphql/schema/*.graphql" 

@@ -1,3 +1,7 @@
-test Query{
-    sample
+test Mutation{
+    createCustomer: Customer
+}
+
+type Customer{
+    name: String
 }
